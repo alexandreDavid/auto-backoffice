@@ -1,24 +1,38 @@
 <template>
-  <div class="flex flex-center">
-    <h1 v-once>{{ config.name }}</h1>
-    <div>Filters</div>
-    <div>
-      <table>
-        <thead>
-          <th v-for="field in config.fields" :key="field.value">
+  <q-page padding>
+    <h5 class="q-mb-md q-mt-none">{{ config.name }}</h5>
+    <q-card class="q-mb-lg" v-if="filters.length">
+      <q-card-section class="row q-px-none">
+        <q-input
+          clearable
+          v-for="(filter, key) in filters"
+          :key="key"
+          class="col-12 col-sm-6 col-md-4 q-px-md"
+          v-model="queries[filter.query]"
+          :label="filter.label"
+          change="setFilter"
+        />
+      </q-card-section>
+    </q-card>
+    <q-markup-table v-if="fields.length">
+      <thead>
+        <tr>
+          <th v-for="field in fields" :key="field.value" class="text-left">
             {{ field.label }}
           </th>
           <th></th>
-        </thead>
-        <tr v-for="row in list" :key="row.id">
-          <td v-for="field in config.fields" :key="field.id">
-            {{ row[field.value] }}
-          </td>
-          <td><button @click="$router.push(`/${type}/${row.id}`)">Edit</button></td>
         </tr>
-      </table>
-    </div>
-  </div>
+      </thead>
+      <tr v-for="row in list" :key="row.id">
+        <td v-for="field in fields" :key="field.id">
+          {{ row[field.value] }}
+        </td>
+        <td class="text-right">
+          <button @click="$router.push(`/${type}/${row.id}`)">Edit</button>
+        </td>
+      </tr>
+    </q-markup-table>
+  </q-page>
 </template>
 
 <script>
@@ -28,29 +42,56 @@ export default {
     type: {
       type: String,
       required: true,
-    }
+    },
   },
   data() {
     return {
-      list: [
-        {
-          id: 1,
-          label: "Label 1",
-        },
-        {
-          id: 2,
-          label: "Label 2",
-        },
-        {
-          id: 3,
-          label: "Label 3",
-        },
-      ],
+      config: {},
+      list: [],
+      fields: [],
+      filters: [],
+      queries: {},
     };
   },
-  computed: {
-    config() {
-      return this.$store.getters.getConfig(this.type);
+  watch: {
+    type() {
+      this.onTypeChanges();
+    },
+    queries: {
+      deep: true,
+      handler(query) {
+        Object.keys(query).forEach(
+          (key) => query[key] === null && delete query[key]
+        );
+        this.$router.push({ query: query });
+      },
+    },
+  },
+  created() {
+    this.onTypeChanges();
+    if (this.$route.query) {
+      this.queries = { ...this.$route.query };
+    }
+  },
+  methods: {
+    onTypeChanges() {
+      this.config = this.$store.getters.getConfig(this.type);
+      const list = this.config.list;
+      if (!list) {
+        this.list = [];
+        this.fields = [];
+        this.filters = [];
+        return;
+      }
+      if (list.data.type === "static") {
+        this.list = list.data.values;
+      }
+      if (list.fields) {
+        this.fields = this.config.list.fields;
+      } else {
+        this.fields = this.config.fields;
+      }
+      this.filters = list.filters || [];
     },
   },
 };
