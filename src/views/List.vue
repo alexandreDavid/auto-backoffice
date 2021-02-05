@@ -1,10 +1,14 @@
 <template>
   <q-page padding>
-    <h5 class="q-mb-md q-mt-none">{{ config.name }}</h5>
-    <q-card class="q-mb-lg" v-if="filters.length">
+    <h5 class="q-mb-md q-mt-none full-width row justify-between items-start content-start">
+      <span>{{ config.name }}</span>
+      <q-btn color="secondary" label="Add" icon="add" />
+    </h5>
+    <q-card flat class="q-mb-lg" v-if="filters.length">
       <q-card-section class="row q-px-none">
         <q-input
           clearable
+          dense
           v-for="(filter, key) in filters"
           :key="key"
           class="col-12 col-sm-6 col-md-4 q-px-md"
@@ -28,7 +32,12 @@
           {{ row[field.value] }}
         </td>
         <td class="text-right">
-          <button @click="$router.push(`/${type}/${row.id}`)">Edit</button>
+          <q-btn
+            flat
+            @click="$router.push(`/${type}/${row.id}`)"
+            color="primary"
+            label="Détail"
+          />
         </td>
       </tr>
     </q-markup-table>

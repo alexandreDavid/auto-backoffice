@@ -1,11 +1,32 @@
 <template>
-  <div class="flex flex-center">
-    <h1 v-once>{{ infos.title }}</h1>
-    <div v-for="field in config.fields" :key="field.value">
-      <label>{{ field.label }}</label>
-      {{ infos[field.value] }}
+  <q-page padding>
+    <h5
+      class="q-mb-md q-mt-none full-width row justify-between items-start content-start"
+    >
+      <span>{{ config.name }}</span>
+      <q-btn
+        v-if="!isEditing"
+        color="secondary"
+        label="Edit"
+        icon="edit"
+        @click="edit"
+      />
+    </h5>
+    <div class="q-gutter-md">
+      <q-input
+        v-for="field in config.fields"
+        :key="field.value"
+        :label="field.label"
+        v-model="infos[field.value]"
+        dense
+        :readonly="!isEditing"
+      />
     </div>
-  </div>
+    <div v-if="isEditing" class="q-pa-md q-gutter-sm">
+      <q-btn flat color="accent" label="Cancel" @click="cancelEdition" />
+      <q-btn color="primary" label="Save" icon="save" @click="saveEdition" />
+    </div>
+  </q-page>
 </template>
 
 <script>
@@ -24,6 +45,8 @@ export default {
   data() {
     return {
       infos: {},
+      isEditing: false,
+      infosBeforeEdit: {},
     };
   },
   computed: {
@@ -37,6 +60,19 @@ export default {
       label: "Label test",
       title: "testada",
     };
+  },
+  methods: {
+    edit() {
+      this.isEditing = true;
+      this.infosBeforeEdit = { ...this.infos };
+    },
+    cancelEdition() {
+      this.isEditing = false;
+      this.infos = this.infosBeforeEdit;
+    },
+    saveEdition() {
+      this.isEditing = false;
+    },
   },
 };
 </script>
