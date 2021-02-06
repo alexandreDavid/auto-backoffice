@@ -1,5 +1,5 @@
 <template>
-  <q-header
+  <div
     class="bg-white text-grey-8 q-py-xs"
     height-hint="58"
     v-if="$q.screen.lt.md"
@@ -21,10 +21,12 @@
         </q-toolbar-title>
       </q-btn>
     </q-toolbar>
-  </q-header>
+
+    <q-separator class="q-my-xs" />
+  </div>
   <q-list padding>
     <q-item
-      v-for="link in this.$store.state.config"
+      v-for="link in config"
       :key="link.key"
       v-ripple
       clickable
@@ -130,6 +132,7 @@
 <script>
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
+
 import { fab500px, fabYoutube } from "@quasar/extras/fontawesome-v5";
 export default {
   name: "ConfigList",
@@ -146,6 +149,7 @@ export default {
 
     return { activeLink };
   },
+  emits: ["close"],
   data() {
     return {
       icon: fab500px,
@@ -188,6 +192,11 @@ export default {
         { text: "Test new features" },
       ],
     };
+  },
+  computed: {
+    config() {
+      return this.$store.state.config;
+    },
   },
 };
 </script>
