@@ -1,9 +1,15 @@
 import { boot } from 'quasar/wrappers'
 import { createI18n } from 'vue-i18n'
 import messages from 'src/i18n'
+import { Quasar } from 'quasar'
+
+let locale = Quasar.lang.getLocale()
+if (!Object.keys(messages).includes(locale)) {
+  locale = 'en-US'
+}
 
 const i18n = createI18n({
-  locale: 'en-us',
+  locale,
   messages
 })
 

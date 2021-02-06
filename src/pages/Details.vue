@@ -7,7 +7,7 @@
       <q-btn
         v-if="!isEditing"
         color="secondary"
-        label="Edit"
+        :label="$t('edit')"
         icon="edit"
         @click="edit"
       />
@@ -23,8 +23,8 @@
       />
     </div>
     <div v-if="isEditing" class="q-pa-md q-gutter-sm">
-      <q-btn flat color="accent" label="Cancel" @click="cancelEdition" />
-      <q-btn color="primary" label="Save" icon="save" @click="saveEdition" />
+      <q-btn flat color="accent" :label="$t('cancel')" @click="cancelEdition" />
+      <q-btn color="primary" :label="$t('save')" icon="save" @click="saveEdition" />
     </div>
   </q-page>
 </template>

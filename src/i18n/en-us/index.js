@@ -3,5 +3,12 @@
 
 export default {
   failed: 'Action failed',
-  success: 'Action was successful'
+  success: 'Action was successful',
+  nothingHere: 'Oops. Nothing here...',
+  goHome: 'Go Home',
+  edit: 'Edit',
+  cancel: 'Cancel',
+  save: 'Save',
+  details: 'Details',
+  add: 'Add'
 }

@@ -6,7 +6,7 @@
       <span>{{ config.name }}</span>
       <q-btn
         color="secondary"
-        label="Add"
+        :label="$t('add')"
         icon="add"
         @click="$router.push(`/models/${type}/new`)"
       />
@@ -43,7 +43,7 @@
             flat
             @click="$router.push(`/models/${type}/${row.id}`)"
             color="primary"
-            label="Détail"
+            :label="$t('details')"
           />
         </td>
       </tr>
