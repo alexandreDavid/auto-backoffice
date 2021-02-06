@@ -1,66 +1,88 @@
-import { createStore } from "vuex";
+import { store } from 'quasar/wrappers'
+import { createStore } from 'vuex'
 
-export default createStore({
-  state: {
-    config: [
-      {
-        key: "test",
-        icon: "home",
-        name: "List test",
-        fields: [
-          {
-            value: "id",
-            label: "Identifiant",
-            type: "int",
-          },
-          {
-            value: "label",
-            label: "Label",
-            type: "string",
-          },
-        ],
-        list: {
-          data: {
-            type: 'static',
-            values: [
-              {
-                id: 1,
-                label: "Label 1",
-              },
-              {
-                id: 2,
-                label: "Label 2",
-              },
-              {
-                id: 3,
-                label: "Label 3",
-              },
-            ]
-          },
-          editable: true,
-          creatable: true,
-          filters: [
+// import example from './module-example'
+
+/*
+ * If not building with SSR mode, you can
+ * directly export the Store instantiation;
+ *
+ * The function below can be async too; either use
+ * async/await or return a Promise which resolves
+ * with the Store instance.
+ */
+
+export default store(function (/* { ssrContext } */) {
+  const Store = createStore({
+    state: {
+      config: [
+        {
+          key: 'test',
+          icon: 'home',
+          name: 'List test',
+          fields: [
             {
-              label: "Label",
-              type: "string",
-              query: "label",
+              value: 'id',
+              label: 'Identifiant',
+              type: 'int'
             },
             {
-              label: "Label2",
-              type: "string",
-              query: "label2",
+              value: 'label',
+              label: 'Label',
+              type: 'string'
             }
           ],
-        },
-      },
-    ],
-  },
-  mutations: {},
-  actions: {},
-  getters: {
-    getConfig: (state) => (key) => {
-      return state.config.find(config => config.key === key) || {};
+          list: {
+            data: {
+              type: 'static',
+              values: [
+                {
+                  id: 1,
+                  label: 'Label 1'
+                },
+                {
+                  id: 2,
+                  label: 'Label 2'
+                },
+                {
+                  id: 3,
+                  label: 'Label 3'
+                }
+              ]
+            },
+            editable: true,
+            creatable: true,
+            filters: [
+              {
+                label: 'Label',
+                type: 'string',
+                query: 'label'
+              },
+              {
+                label: 'Label2',
+                type: 'string',
+                query: 'label2'
+              }
+            ]
+          }
+        }
+      ]
     },
-  },
-  modules: {},
-});
+    mutations: {},
+    actions: {},
+    getters: {
+      getConfig: (state) => (key) => {
+        return state.config.find(config => config.key === key) || {}
+      }
+    },
+    modules: {
+      // example
+    },
+
+    // enable strict mode (adds overhead!)
+    // for dev mode and --debug builds only
+    strict: process.env.DEBUGGING
+  })
+
+  return Store
+})

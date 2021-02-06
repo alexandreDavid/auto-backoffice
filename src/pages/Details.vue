@@ -31,55 +31,55 @@
 
 <script>
 export default {
-  name: "Details",
+  name: 'Details',
   props: {
     type: {
       type: String,
-      required: true,
+      required: true
     },
     id: {
       type: [Number, String],
-      required: true,
-    },
+      required: true
+    }
   },
-  data() {
+  data () {
     return {
       infos: {},
       isEditing: false,
-      infosBeforeEdit: {},
-    };
+      infosBeforeEdit: {}
+    }
   },
   computed: {
-    config() {
-      return this.$store.getters.getConfig(this.type);
-    },
+    config () {
+      return this.$store.getters.getConfig(this.type)
+    }
   },
-  created() {
-    if (this.id === "new") {
-      this.isEditing = true;
+  created () {
+    if (this.id === 'new') {
+      this.isEditing = true
     } else {
       this.infos = {
         id: this.id,
-        label: "Label test",
-        title: "testada",
-      };
+        label: 'Label test',
+        title: 'testada'
+      }
     }
   },
   methods: {
-    edit() {
-      this.isEditing = true;
-      this.infosBeforeEdit = { ...this.infos };
+    edit () {
+      this.isEditing = true
+      this.infosBeforeEdit = { ...this.infos }
     },
-    cancelEdition() {
-      this.isEditing = false;
-      if (this.id === "new") {
-        this.$router.go(-1);
+    cancelEdition () {
+      this.isEditing = false
+      if (this.id === 'new') {
+        this.$router.go(-1)
       }
-      this.infos = this.infosBeforeEdit;
+      this.infos = this.infosBeforeEdit
     },
-    saveEdition() {
-      this.isEditing = false;
-    },
-  },
-};
+    saveEdition () {
+      this.isEditing = false
+    }
+  }
+}
 </script>

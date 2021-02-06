@@ -8,7 +8,7 @@
         color="secondary"
         label="Add"
         icon="add"
-        @click="$router.push(`/${type}/new`)"
+        @click="$router.push(`/models/${type}/new`)"
       />
     </h5>
     <q-card flat class="q-mb-lg" v-if="filters.length">
@@ -41,7 +41,7 @@
         <td class="text-right">
           <q-btn
             flat
-            @click="$router.push(`/${type}/${row.id}`)"
+            @click="$router.push(`/models/${type}/${row.id}`)"
             color="primary"
             label="Détail"
           />
@@ -53,64 +53,64 @@
 
 <script>
 export default {
-  name: "List",
+  name: 'List',
   props: {
     type: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
-  data() {
+  data () {
     return {
       config: {},
       list: [],
       fields: [],
       filters: [],
-      queries: {},
-    };
+      queries: {}
+    }
   },
   watch: {
-    type() {
-      this.onTypeChanges();
+    type () {
+      this.onTypeChanges()
     },
     queries: {
       deep: true,
-      handler(query) {
+      handler (query) {
         Object.keys(query).forEach(
           (key) => query[key] === null && delete query[key]
-        );
-        this.$router.push({ query: query });
-      },
-    },
+        )
+        this.$router.push({ query: query })
+      }
+    }
   },
-  created() {
-    this.onTypeChanges();
+  created () {
+    this.onTypeChanges()
     if (this.$route.query) {
-      this.queries = { ...this.$route.query };
+      this.queries = { ...this.$route.query }
     }
   },
   methods: {
-    onTypeChanges() {
-      this.config = this.$store.getters.getConfig(this.type);
-      const list = this.config.list;
+    onTypeChanges () {
+      this.config = this.$store.getters.getConfig(this.type)
+      const list = this.config.list
       if (!list) {
-        this.list = [];
-        this.fields = [];
-        this.filters = [];
-        return;
+        this.list = []
+        this.fields = []
+        this.filters = []
+        return
       }
-      if (list.data.type === "static") {
-        this.list = list.data.values;
+      if (list.data.type === 'static') {
+        this.list = list.data.values
       }
       if (list.fields) {
-        this.fields = this.config.list.fields;
+        this.fields = this.config.list.fields
       } else {
-        this.fields = this.config.fields;
+        this.fields = this.config.fields
       }
-      this.filters = list.filters || [];
-    },
-  },
-};
+      this.filters = list.filters || []
+    }
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
