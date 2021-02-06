@@ -1,4 +1,27 @@
 <template>
+  <q-header
+    class="bg-white text-grey-8 q-py-xs"
+    height-hint="58"
+    v-if="$q.screen.lt.md"
+  >
+    <q-toolbar>
+      <q-btn
+        flat
+        dense
+        round
+        @click="$emit('close')"
+        aria-label="Menu"
+        icon="menu"
+      />
+
+      <q-btn flat no-caps no-wrap class="q-ml-xs">
+        <q-icon :name="icon" color="red" size="28px" />
+        <q-toolbar-title shrink class="text-weight-bold">
+          FineJoss
+        </q-toolbar-title>
+      </q-btn>
+    </q-toolbar>
+  </q-header>
   <q-list padding>
     <q-item
       v-for="link in this.$store.state.config"
@@ -6,18 +29,27 @@
       v-ripple
       clickable
       :active="activeLink === link.key"
-      active-class="bg-teal-1 text-grey-8"
+      active-class="bg-grey-3 text-dark text-bold"
       @click="$router.push(`/${link.key}`)"
     >
       <q-item-section avatar>
-        <q-icon :name="link.icon" />
+        <q-icon
+          :color="activeLink === link.key ? 'red' : 'grey'"
+          :name="link.icon"
+        />
       </q-item-section>
       <q-item-section>
         <q-item-label>{{ link.name }}</q-item-label>
       </q-item-section>
     </q-item>
 
-    <q-item v-for="link in links1" :key="link.text" v-ripple clickable @click="$router.push(`/${link.text}`)">
+    <q-item
+      v-for="link in links1"
+      :key="link.text"
+      v-ripple
+      clickable
+      @click="$router.push(`/${link.text}`)"
+    >
       <q-item-section avatar>
         <q-icon color="grey" :name="link.icon" />
       </q-item-section>
@@ -96,26 +128,27 @@
 </style>
 
 <script>
-import { ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
-import { fabYoutube } from "@quasar/extras/fontawesome-v5";
+import { ref, watch } from "vue";
+import { useRoute } from "vue-router";
+import { fab500px, fabYoutube } from "@quasar/extras/fontawesome-v5";
 export default {
   name: "ConfigList",
   setup() {
-    const route = useRoute()
-    const activeLink = ref()
+    const route = useRoute();
+    const activeLink = ref();
 
     watch(
       () => route.params,
-      async newParams => {
-        activeLink.value = newParams.type
+      async (newParams) => {
+        activeLink.value = newParams.type;
       }
-    )
+    );
 
-    return { activeLink }
+    return { activeLink };
   },
   data() {
     return {
+      icon: fab500px,
       links1: [
         { icon: "home", text: "Home" },
         { icon: "whatshot", text: "Trending" },
