@@ -1,8 +1,15 @@
 <template>
   <q-page padding>
-    <h5 class="q-mb-md q-mt-none full-width row justify-between items-start content-start">
+    <h5
+      class="q-mb-md q-mt-none full-width row justify-between items-start content-start"
+    >
       <span>{{ config.name }}</span>
-      <q-btn color="secondary" label="Add" icon="add" />
+      <q-btn
+        color="secondary"
+        label="Add"
+        icon="add"
+        @click="$router.push(`/${type}/new`)"
+      />
     </h5>
     <q-card flat class="q-mb-lg" v-if="filters.length">
       <q-card-section class="row q-px-none">

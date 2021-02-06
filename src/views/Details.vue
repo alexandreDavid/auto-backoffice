@@ -55,11 +55,15 @@ export default {
     },
   },
   created() {
-    this.infos = {
-      id: this.id,
-      label: "Label test",
-      title: "testada",
-    };
+    if (this.id === "new") {
+      this.isEditing = true;
+    } else {
+      this.infos = {
+        id: this.id,
+        label: "Label test",
+        title: "testada",
+      };
+    }
   },
   methods: {
     edit() {
@@ -68,6 +72,9 @@ export default {
     },
     cancelEdition() {
       this.isEditing = false;
+      if (this.id === "new") {
+        this.$router.go(-1);
+      }
       this.infos = this.infosBeforeEdit;
     },
     saveEdition() {
@@ -76,21 +83,3 @@ export default {
   },
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
