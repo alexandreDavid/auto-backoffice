@@ -8,18 +8,20 @@
         <q-separator />
         <q-card-section>
           <q-input
-            label="E-mail"
+            :label="$t('mail')"
             type="email"
+            name="email"
             v-model="email"
           />
           <q-input
-            label="Mot de passe"
+            :label="$t('password')"
+            name="password"
             type="password"
             v-model="password"
           />
           <div class="q-pa-md q-gutter-sm">
-            <q-btn color="primary" label="Se connecter" @click="login(email, password)" :disabled="!email || !password" />
-            <q-btn flat color="secondary" to="/forgotten-password" label="Mot de passe oublié ?" />
+            <q-btn color="primary" :label="$t('login')" @click="login(email, password)" :disabled="!email || !password" />
+            <q-btn flat color="secondary" to="/forgotten-password" :label="$t('forgottenPassword')" />
           </div>
          </q-card-section>
       </q-card>

@@ -80,6 +80,38 @@
               <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
             </q-avatar>
             <q-tooltip>Account</q-tooltip>
+            <q-menu auto-close>
+              <q-list style="min-width: 100px">
+                <q-item clickable>
+                  <q-item-section>New tab</q-item-section>
+                </q-item>
+                <q-item clickable>
+                  <q-item-section>New incognito tab</q-item-section>
+                </q-item>
+                <q-separator />
+                <q-item clickable>
+                  <q-item-section>Recent tabs</q-item-section>
+                </q-item>
+                <q-item clickable>
+                  <q-item-section>History</q-item-section>
+                </q-item>
+                <q-item clickable>
+                  <q-item-section>Downloads</q-item-section>
+                </q-item>
+                <q-separator />
+                <q-item clickable>
+                  <q-item-section>Settings</q-item-section>
+                </q-item>
+                <q-separator />
+                <q-item clickable>
+                  <q-item-section>Help &amp; Feedback</q-item-section>
+                </q-item>
+                <q-separator />
+                <q-item clickable @click="logout" class="text-negative">
+                  <q-item-section>{{ $t('logout') }}</q-item-section>
+                </q-item>
+              </q-list>
+            </q-menu>
           </q-btn>
         </div>
       </q-toolbar>
@@ -103,6 +135,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import { auth } from 'boot/firebase'
+
 import { fab500px } from '@quasar/extras/fontawesome-v5'
 import ConfigList from 'components/ConfigList.vue'
 export default {
@@ -113,6 +148,16 @@ export default {
       leftDrawerOpen: false,
       search: '',
       icon: fab500px
+    }
+  },
+  methods: {
+    ...mapActions([
+      'setAuthToken'
+    ]),
+    async logout () {
+      await auth.signOut()
+      this.setAuthToken('')
+      this.$router.go('/login')
     }
   }
 }

@@ -3,19 +3,20 @@
     <q-page padding>
       <q-card class="fixed-center">
         <q-card-section>
-          <q-btn @click="$router.go(-1)" flat label="retour" />
-          <h5>Mot de passe oublié</h5>
-          <p>Saisissez votre email pour réinitialiser votre mot de passe</p>
+          <q-btn @click="$router.go(-1)" flat :label="$t('back')" icon="keyboard_arrow_left" />
+          <h5>{{ $t('forgottenPassword') }}</h5>
+          <p>{{ $t('enterMail') }}</p>
           <q-input
-            label="E-mail"
+            :label="$t('mail')"
             type="email"
+            name="email"
             v-model="email"
           />
           <div class="q-pa-md q-gutter-sm">
-            <q-btn color="primary" label="Envoyer le mail" @click="sendMail(email)" :disabled="!email" />
+            <q-btn color="primary" :label="$t('sendMail')" @click="sendMail(email)" :disabled="!email" />
           </div>
           <div class="q-pa-md q-gutter-sm" v-show="sent">
-            <p>Email envoyé.Veuillez cliquer sur le lien reçu dans votre boite mail pour réinitialiser votre mot de passe.</p>
+            <p>{{ $t('emailSuccess') }}</p>
           </div>
          </q-card-section>
       </q-card>
