@@ -1,8 +1,21 @@
 
 const routes = [
   {
+    path: '/login',
+    name: 'Login',
+    component: () => import('pages/Login.vue'),
+    meta: { requiresNoAuth: true }
+  },
+  {
+    path: '/forgotten-password',
+    name: 'ForgottenPassword',
+    component: () => import('pages/ForgottenPassword.vue'),
+    meta: { requiresNoAuth: true }
+  },
+  {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
+    meta: { requiresAuth: true },
     children: [
       { path: '', component: () => import('pages/Index.vue') },
       {

@@ -15,6 +15,7 @@ import { createStore } from 'vuex'
 export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     state: {
+      authToken: localStorage.getItem('token'),
       config: [
         {
           key: 'test',
@@ -68,9 +69,21 @@ export default store(function (/* { ssrContext } */) {
         }
       ]
     },
-    mutations: {},
-    actions: {},
+    mutations: {
+      setAuthToken (state, token) {
+        localStorage.setItem('token', token)
+        state.authToken = token
+      }
+    },
+    actions: {
+      setAuthToken ({ commit }, token) {
+        commit('setAuthToken', token)
+      }
+    },
     getters: {
+      isAuthenticated: state => {
+        return !!state.authToken
+      },
       getConfig: (state) => (key) => {
         return state.config.find(config => config.key === key) || {}
       }
