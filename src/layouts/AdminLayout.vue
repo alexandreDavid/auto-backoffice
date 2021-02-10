@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf" class="bg-grey-1">
-    <q-header class="bg-white text-grey-8 q-py-xs" height-hint="58">
+    <q-header class="bg-red-3 text-grey-8 q-py-xs" height-hint="58">
       <q-toolbar>
         <q-btn
           flat
@@ -46,11 +46,10 @@
             dense
             flat
             color="grey-8"
-            icon="settings"
+            icon="video_call"
             v-if="$q.screen.gt.sm"
-            @click="$router.push('/admin')"
           >
-            <q-tooltip>Administration</q-tooltip>
+            <q-tooltip>Create a video or post</q-tooltip>
           </q-btn>
           <q-btn
             round
@@ -125,7 +124,7 @@
       :width="240"
     >
       <q-scroll-area class="fit">
-        <config-list @close="leftDrawerOpen = false" />
+        <admin-list @close="leftDrawerOpen = false" />
       </q-scroll-area>
     </q-drawer>
 
@@ -140,10 +139,10 @@ import { mapActions } from 'vuex'
 import { auth } from 'boot/firebase'
 
 import { fab500px } from '@quasar/extras/fontawesome-v5'
-import ConfigList from 'components/ConfigList.vue'
+import AdminList from 'components/AdminList.vue'
 export default {
   name: 'MyLayout',
-  components: { ConfigList },
+  components: { AdminList },
   data () {
     return {
       leftDrawerOpen: false,
