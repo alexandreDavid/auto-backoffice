@@ -18,6 +18,7 @@ const routes = [
     meta: { requiresAuth: true },
     children: [
       { path: '', component: () => import('pages/Index.vue') },
+      { path: 'models/:type', component: () => import('pages/admin/models/type.vue'), props: true },
       { path: 'models', component: () => import('pages/admin/Models.vue') },
       { path: 'rights', component: () => import('pages/admin/Rights.vue') },
       { path: 'users', component: () => import('pages/admin/Users.vue') }

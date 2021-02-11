@@ -21,15 +21,6 @@
 
 <script>
 export default {
-  name: 'AdminUsers',
-  data () {
-    return {
-      config: {},
-      list: [],
-      fields: [],
-      filters: [],
-      queries: {}
-    }
-  }
+  name: 'AdminUsers'
 }
 </script>

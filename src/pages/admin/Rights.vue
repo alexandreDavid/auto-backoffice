@@ -21,21 +21,6 @@
 
 <script>
 export default {
-  name: 'AdminRights',
-  props: {
-    type: {
-      type: String,
-      required: true
-    }
-  },
-  data () {
-    return {
-      config: {},
-      list: [],
-      fields: [],
-      filters: [],
-      queries: {}
-    }
-  }
+  name: 'AdminRights'
 }
 </script>

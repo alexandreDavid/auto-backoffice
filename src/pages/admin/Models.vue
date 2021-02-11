@@ -11,30 +11,34 @@
         @click="$router.push('/admin/models/new')"
       />
     </h5>
-    <q-card class="my-card">
-      <q-card-section>
-        Lorem
-      </q-card-section>
-    </q-card>
+    <div class="q-pa-md row items-start q-gutter-md">
+      <q-card class="my-card" v-for="conf in config" :key="conf.key">
+        <q-card-section>
+          <div class="text-h6">{{ conf.name }}</div>
+          <div class="text-subtitle2">by John Doe</div>
+        </q-card-section>
+        <q-card-section>
+          Lorem
+        </q-card-section>
+        <q-card-actions>
+          <q-btn flat @click="$router.push(`/admin/models/${conf.key}`)">Ouvrir</q-btn>
+        </q-card-actions>
+      </q-card>
+    </div>
   </q-page>
 </template>
 
 <script>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+
 export default {
   name: 'AdminModels',
-  props: {
-    type: {
-      type: String,
-      required: true
-    }
-  },
-  data () {
+  setup () {
+    const store = useStore()
+
     return {
-      config: {},
-      list: [],
-      fields: [],
-      filters: [],
-      queries: {}
+      config: computed(() => store.state.config)
     }
   }
 }
