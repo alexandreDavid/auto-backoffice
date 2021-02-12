@@ -61,9 +61,9 @@ export default {
     return {
       icon: fab500px,
       config: [
-        { icon: 'table_view', text: 'Models', route: '/admin/models' },
-        { icon: 'lock', text: 'Rights', route: '/admin/rights' },
-        { icon: 'supervisor_account', text: 'Users', route: '/admin/users' }
+        { icon: 'table_view', text: this.$t('models'), route: '/admin/models' },
+        { icon: 'lock', text: this.$t('permissions'), route: '/admin/permissions' },
+        { icon: 'supervisor_account', text: this.$t('users'), route: '/admin/users' }
       ]
     }
   }

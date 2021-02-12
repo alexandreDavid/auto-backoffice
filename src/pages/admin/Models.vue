@@ -1,9 +1,9 @@
 <template>
   <q-page padding>
     <h5
-      class="q-mb-md q-mt-none full-width row justify-between items-start content-start"
+      class="q-my-none full-width row justify-between items-start content-start"
     >
-      <span>Models</span>
+      <span class="q-mb-md">{{ $t('models') }}</span>
       <q-btn
         color="secondary"
         :label="$t('add')"
@@ -21,7 +21,7 @@
           Lorem
         </q-card-section>
         <q-card-actions>
-          <q-btn flat @click="$router.push(`/admin/models/${conf.key}`)">Ouvrir</q-btn>
+          <q-btn flat @click="$router.push(`/admin/models/${conf.key}`)">{{ $t('open') }}</q-btn>
         </q-card-actions>
       </q-card>
     </div>

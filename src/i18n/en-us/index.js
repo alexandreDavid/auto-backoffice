@@ -17,5 +17,9 @@ export default {
   emailSuccess: 'Email sent. Please click on the link received in your mailbox to reset your password.',
   password: 'Password',
   login: 'Login',
-  logout: 'Logout'
+  logout: 'Logout',
+  users: 'Users',
+  permissions: 'Permissions',
+  models: 'Models',
+  open: 'Open'
 }

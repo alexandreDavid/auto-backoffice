@@ -17,5 +17,9 @@ export default {
   emailSuccess: 'Email envoyé.Veuillez cliquer sur le lien reçu dans votre boite mail pour réinitialiser votre mot de passe.',
   password: 'Mot de passe',
   login: 'Se connecter',
-  logout: 'Se deconnecter'
+  logout: 'Se deconnecter',
+  users: 'Utilisateurs',
+  permissions: 'Permissions',
+  models: 'Modèles',
+  open: 'Ouvrir'
 }

@@ -1,14 +1,14 @@
 <template>
   <q-page padding>
     <h5
-      class="q-mb-md q-mt-none full-width row justify-between items-start content-start"
+      class="q-my-none full-width row justify-between items-start content-start"
     >
-      <span>Rights</span>
+      <span class="q-mb-md">{{ $t('permissions') }}</span>
       <q-btn
         color="secondary"
         :label="$t('add')"
         icon="add"
-        @click="$router.push('/admin/rights/new')"
+        @click="$router.push('/admin/permissions/new')"
       />
     </h5>
     <q-card class="my-card">

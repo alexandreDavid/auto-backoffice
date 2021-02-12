@@ -1,9 +1,9 @@
 <template>
   <q-page padding>
     <h5
-      class="q-mb-md q-mt-none full-width row justify-between items-start content-start"
+      class="q-my-none full-width row justify-between items-start content-start"
     >
-      <span>Users</span>
+      <span class="q-mb-md">{{ $t('users') }}</span>
       <q-btn
         color="secondary"
         :label="$t('add')"
