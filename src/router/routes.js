@@ -25,6 +25,17 @@ const routes = [
     ]
   },
   {
+    path: '/settings',
+    component: () => import('layouts/SettingsLayout.vue'),
+    meta: { requiresAuth: true },
+    children: [
+      { path: '', component: () => import('pages/Index.vue') },
+      { path: 'account', component: () => import('pages/admin/models/type.vue') },
+      { path: 'billing', component: () => import('pages/admin/Models.vue') },
+      { path: 'security', component: () => import('pages/admin/Permissions.vue') }
+    ]
+  },
+  {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     meta: { requiresAuth: true },
