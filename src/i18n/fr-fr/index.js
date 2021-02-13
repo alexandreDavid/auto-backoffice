@@ -21,5 +21,10 @@ export default {
   users: 'Utilisateurs',
   permissions: 'Permissions',
   models: 'Modèles',
-  open: 'Ouvrir'
+  open: 'Ouvrir',
+  settings: 'Paramètres',
+  account: 'Compte',
+  security: 'Sécurité',
+  appearance: 'Apparence',
+  billing: 'Tarification'
 }

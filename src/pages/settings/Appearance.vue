@@ -1,3 +1,3 @@
 <template>
-  Reset pwd
+  Coming soon
 </template>

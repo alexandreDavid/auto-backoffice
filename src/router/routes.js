@@ -31,6 +31,7 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/Index.vue') },
       { path: 'account', component: () => import('pages/admin/models/type.vue') },
+      { path: 'appearance', component: () => import('pages/admin/Models.vue') },
       { path: 'billing', component: () => import('pages/admin/Models.vue') },
       { path: 'security', component: () => import('pages/admin/Permissions.vue') }
     ]
