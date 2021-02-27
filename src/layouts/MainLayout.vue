@@ -20,15 +20,16 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import ConfigList from 'components/ConfigList.vue'
 import Navbar from 'src/components/Navbar.vue'
 
 export default {
   name: 'MainLayout',
   components: { ConfigList, Navbar },
-  data () {
+  setup () {
     return {
-      leftDrawerOpen: false
+      leftDrawerOpen: ref(false)
     }
   }
 }

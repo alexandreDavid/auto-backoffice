@@ -10,7 +10,7 @@
         icon="menu"
       />
 
-      <q-btn flat no-caps no-wrap class="q-ml-xs" v-if="$q.screen.gt.xs">
+      <q-btn flat no-caps no-wrap class="q-ml-xs" v-if="$q.screen.gt.xs" @click="$router.push('/')">
         <q-icon :name="icon" color="red" size="28px" />
         <q-toolbar-title shrink class="text-weight-bold">
           FineJoss
@@ -99,8 +99,8 @@
                 <q-item-section>Downloads</q-item-section>
               </q-item>
               <q-separator />
-              <q-item clickable>
-                <q-item-section>Settings</q-item-section>
+              <q-item clickable @click="$router.push('/settings/account')">
+                <q-item-section>{{ $t('settings') }}</q-item-section>
               </q-item>
               <q-separator />
               <q-item clickable>
@@ -119,7 +119,9 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 import { auth } from 'boot/firebase'
 
 import { fab500px } from '@quasar/extras/fontawesome-v5'
@@ -127,21 +129,19 @@ import { fab500px } from '@quasar/extras/fontawesome-v5'
 export default {
   name: 'Navbar',
   emits: ['toggleDrawer'],
-  data () {
+  setup () {
+    const store = useStore()
+    const router = useRouter()
+
     return {
-      leftDrawerOpen: false,
-      search: '',
-      icon: fab500px
-    }
-  },
-  methods: {
-    ...mapActions([
-      'setAuthToken'
-    ]),
-    async logout () {
-      await auth.signOut()
-      this.setAuthToken('')
-      this.$router.go('/login')
+      leftDrawerOpen: ref(false),
+      search: ref(''),
+      icon: fab500px,
+      logout: async () => {
+        await auth.signOut()
+        store.commit('setAuthToken', '')
+        router.go('/login')
+      }
     }
   }
 }

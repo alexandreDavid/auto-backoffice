@@ -29,11 +29,11 @@ const routes = [
     component: () => import('layouts/SettingsLayout.vue'),
     meta: { requiresAuth: true },
     children: [
-      { path: '', component: () => import('pages/Index.vue') },
-      { path: 'account', component: () => import('pages/admin/models/type.vue') },
-      { path: 'appearance', component: () => import('pages/admin/Models.vue') },
-      { path: 'billing', component: () => import('pages/admin/Models.vue') },
-      { path: 'security', component: () => import('pages/admin/Permissions.vue') }
+      { path: '', redirect: 'account' },
+      { path: 'account', component: () => import('pages/settings/Account.vue') },
+      { path: 'appearance', component: () => import('pages/settings/Appearance.vue') },
+      { path: 'billing', component: () => import('pages/settings/Billing.vue') },
+      { path: 'security', component: () => import('pages/settings/Security.vue') }
     ]
   },
   {

@@ -1,11 +1,21 @@
 <template>
   <q-layout view="hHh lpR fFf" class="bg-grey-1">
-    <navbar @toggle-drawer="leftDrawerOpen = !leftDrawerOpen" />
+    <navbar />
 
     <q-page-container>
       <div class="q-page q-pa-xl">
         <div class="row q-mb-md">
-          <div>Test</div>
+          <q-item>
+            <q-item-section side>
+              <q-avatar size="48px">
+                <img src="https://cdn.quasar.dev/img/avatar.png" />
+              </q-avatar>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Mary</q-item-label>
+              <q-item-label caption>2 new messages</q-item-label>
+            </q-item-section>
+          </q-item>
         </div>
         <div class="fit row wrap justify-between items-start content-start">
           <div class="col-sm-3 col-12 q-pr-none q-pr-sm-lg">
